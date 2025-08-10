@@ -848,3 +848,23 @@ document.addEventListener("DOMContentLoaded", function() {
 <audio id="tributeAudio" preload="auto" autoplay loop>
     <source src="tribute_music.mp3" type="audio/mp3">
 </audio>
+<audio id="bg-music" preload="auto">
+  <source src="tribute_music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Require user interaction to start music
+  function startMusicOnce() {
+    const music = document.getElementById('bg-music');
+    if (music && music.paused) {
+      music.play().catch(err => console.log("Playback prevented:", err));
+    }
+    document.removeEventListener('click', startMusicOnce);
+    document.removeEventListener('touchstart', startMusicOnce);
+  }
+
+  document.addEventListener('click', startMusicOnce);
+  document.addEventListener('touchstart', startMusicOnce);
+});
+</script>
