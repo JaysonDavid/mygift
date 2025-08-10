@@ -277,45 +277,6 @@
 </head>
 <body>
 
-<!-- Start Screen Overlay -->
-<div id="startOverlay" style="
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 3000;
-    color: white;
-    font-family: Georgia, serif;
-    text-align: center;
-">
-    <h1 style="margin-bottom: 20px;">Jenahfer's Memorial</h1>
-    <button id="startButton" style="
-        padding: 15px 30px;
-        font-size: 1.5em;
-        background: linear-gradient(45deg, #1e3c72, #2a5298);
-        color: white;
-        border: 2px solid #87ceeb;
-        border-radius: 10px;
-        cursor: pointer;
-        box-shadow: 0 4px 15px rgba(135, 206, 235, 0.4);
-    ">Start Memorial</button>
-</div>
-
-<script>
-document.getElementById('startButton').addEventListener('click', function() {
-    var audio = document.getElementById('tributeAudio');
-    if (audio) { audio.play(); }
-    document.getElementById('startOverlay').style.display = 'none';
-});
-</script>
-
-
 <!-- Black Fade-In Overlay -->
 <div id="fadeInOverlay" style="
     position: fixed;
@@ -394,6 +355,7 @@ document.getElementById('startButton').addEventListener('click', function() {
             <h3>Cosmic Journey Status</h3>
             <div id="currentDate">Date: August 5th, 1986</div>
             <div id="daysElapsed">Days Elapsed: 0</div>
+            <div id="hoursElapsed">Hours Since I Last Held You: 0</div>
             <div id="yearsElapsed">Years Elapsed: 0.0</div>
             <div id="earthOrbits">Earth Orbits: 0</div>
             <div id="earthDistance">Earth Distance: 0 billion miles</div>
@@ -708,6 +670,8 @@ document.getElementById('startButton').addEventListener('click', function() {
                 `Date: ${currentDate.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}`;
             document.getElementById('daysElapsed').textContent = 
                 `Days Elapsed: ${Math.round(daysElapsed)}`;
+            document.getElementById('hoursElapsed').textContent = 
+            `Hours Since I Last Held You: ${Math.round(daysElapsed * 24).toLocaleString()}`;
             document.getElementById('yearsElapsed').textContent = 
                 `Years Elapsed: ${Math.round(currentYears * 10) / 10}`;
             document.getElementById('earthOrbits').textContent = 
@@ -871,7 +835,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Trigger tribute fade after Cygnus
                 setTimeout(() => {
                     document.getElementById('finalTributeOverlay').style.opacity = 1;
-                }, 8000); // 7 sec after Cygnus (extended by 3 seconds)
+                }, 5000); // 4 sec after Cygnus
             }
         });
     });
