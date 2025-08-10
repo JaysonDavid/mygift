@@ -277,6 +277,11 @@
 </head>
 <body>
 
+<div class="controls visible" id="controls">
+    <button id="startMemorialBtn">START MEMORIAL</button>
+</div>
+
+
 <!-- Black Fade-In Overlay -->
 <div id="fadeInOverlay" style="
     position: fixed;
@@ -814,7 +819,6 @@ window.addEventListener('load', () => {
 <script>
 // Wait until DOM is ready
 document.addEventListener("DOMContentLoaded", function() {
-    console.log("START MEMORIAL button clicked");
     // Select the last content-layer in the memorial
     const layers = document.querySelectorAll('.content-layer');
     if (!layers.length) return;
@@ -846,6 +850,32 @@ document.addEventListener("DOMContentLoaded", function() {
 <audio id="tributeAudio" preload="auto">
     <source src="tribute_music.mp3" type="audio/mp3">
 </audio>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const startBtn = document.getElementById("startMemorialBtn");
+    const controls = document.getElementById("controls");
+
+    // Use your actual audio file
+    const audio = new Audio("tribute_music.mp3");
+
+    startBtn.addEventListener("click", function () {
+        console.log("START MEMORIAL button clicked");
+        audio.currentTime = 0;
+        audio.play().catch(err => console.error("Audio play failed:", err));
+
+        // Trigger animations by adding the active class
+        document.querySelectorAll(".content-layer").forEach(layer => {
+            layer.classList.add("active");
+        });
+
+        // Fade out the button
+        controls.style.opacity = "0";
+        setTimeout(() => controls.style.display = "none", 1000);
+    });
+});
+</script>
 
 </body>
 </html>
