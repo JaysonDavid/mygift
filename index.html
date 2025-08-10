@@ -277,11 +277,6 @@
 </head>
 <body>
 
-<div id="startMemorialControls" style="display:flex;justify-content:center;align-items:center;position:fixed;top:0;left:0;width:100%;height:100%;background:black;z-index:9999;">
-    <button id="startMemorialBtn" style="font-size:22px;padding:14px 28px;background:#1e3c72;color:white;border:none;border-radius:8px;cursor:pointer;">START MEMORIAL</button>
-</div>
-
-
 <!-- Black Fade-In Overlay -->
 <div id="fadeInOverlay" style="
     position: fixed;
@@ -412,7 +407,7 @@
         // Initialize
         resizeCanvas();
         createStarField();
-        // startAnimation(); // disabled for button trigger
+        if (window.__allowStart) { startAnimation(); }
         
         window.addEventListener('resize', resizeCanvas);
         
@@ -852,28 +847,79 @@ document.addEventListener("DOMContentLoaded", function() {
 </audio>
 
 
+<!-- START MEMORIAL: injected control (safe, minimal, robust) -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const btn = document.getElementById("startMemorialBtn");
-    const controls = document.getElementById("startMemorialControls");
-    const audio = new Audio("tribute_music.mp3");
+// Guard variable to prevent auto-start until user clicks
+window.__allowStart = window.__allowStart || false;
 
+(function() {
+    // Define the public startMemorial function
     window.startMemorial = function() {
-        audio.currentTime = 0;
-        audio.play().catch(err => console.error("Audio play failed:", err));
-        if (typeof startAnimation === "function") {
-            startAnimation();
-        } else {
-            console.error("startAnimation() not found");
+        try {
+            window.__allowStart = true;
+            // Play tribute music
+            try {
+                var audio = new Audio("tribute_music.mp3");
+                audio.currentTime = 0;
+                audio.play().then(function() {
+                    console.log("tribute_music.mp3 playing");
+                }).catch(function(err){ console.warn("Audio play failed:", err); });
+            } catch (e) {
+                console.warn("Unable to create/play audio:", e);
+            }
+
+            // If the original sequence function is present, call it.
+            if (typeof startAnimation === "function") {
+                // Call it asynchronously to give audio a moment to start
+                setTimeout(function(){ try { startAnimation(); } catch(e){ console.error("startAnimation() threw:", e); } }, 20);
+            } else {
+                console.warn("startAnimation() not found at click time.");
+            }
+        } catch (err) {
+            console.error("startMemorial error:", err);
         }
     };
 
-    btn.addEventListener("click", function () {
-        startMemorial();
-        controls.style.display = "none";
-    });
-});
+    // Create the full-screen overlay start button
+    function createStartOverlay() {
+        if (document.getElementById("startMemorialOverlay")) return; // already present
+        var overlay = document.createElement("div");
+        overlay.id = "startMemorialOverlay";
+        overlay.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,1);z-index:2147483647;";
+        var btn = document.createElement("button");
+        btn.id = "startMemorialBtn";
+        btn.textContent = "START MEMORIAL";
+        btn.style.cssText = "font-size:20px;padding:16px 28px;background:linear-gradient(45deg,#1e3c72,#2a5298);color:white;border:2px solid #87ceeb;border-radius:8px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,0.4);";
+        btn.addEventListener("click", function(e){
+            e.stopPropagation();
+            try {
+                window.startMemorial();
+            } catch(err) { console.error(err); }
+            // hide overlay
+            overlay.parentNode && overlay.parentNode.removeChild(overlay);
+        });
+        overlay.appendChild(btn);
+        (document.body || document.documentElement).appendChild(overlay);
+        return overlay;
+    }
+
+    // Try to create overlay after DOM ready. If other scripts remove body contents later,
+    // keep a small retry loop to re-insert overlay for a few seconds.
+    function scheduleOverlayInsert(retriesLeft) {
+        try { createStartOverlay(); } catch(e){ console.warn("overlay create failed", e); }
+        if (retriesLeft > 0) {
+            setTimeout(function(){ scheduleOverlayInsert(retriesLeft-1); }, 500);
+        }
+    }
+
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+        scheduleOverlayInsert(8); // try for ~4 seconds
+    } else {
+        document.addEventListener("DOMContentLoaded", function(){ scheduleOverlayInsert(8); });
+    }
+})();
 </script>
+<!-- END START MEMORIAL injection -->
 
 </body>
 </html>
