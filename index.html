@@ -412,7 +412,7 @@
         // Initialize
         resizeCanvas();
         createStarField();
-        startAnimation();
+        // startAnimation(); // disabled for button trigger
         
         window.addEventListener('resize', resizeCanvas);
         
@@ -858,18 +858,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const controls = document.getElementById("startMemorialControls");
     const audio = new Audio("tribute_music.mp3");
 
-    btn.addEventListener("click", function () {
-        console.log("START MEMORIAL button clicked");
+    window.startMemorial = function() {
         audio.currentTime = 0;
         audio.play().catch(err => console.error("Audio play failed:", err));
-
-        // Activate only the Cygnus map layer (scene2)
-        const cygnusLayer = document.querySelector('#scene2.content-layer');
-        if (cygnusLayer) {
-            cygnusLayer.classList.add("active");
+        if (typeof startAnimation === "function") {
+            startAnimation();
+        } else {
+            console.error("startAnimation() not found");
         }
+    };
 
-        // Remove the overlay with the button
+    btn.addEventListener("click", function () {
+        startMemorial();
         controls.style.display = "none";
     });
 });
