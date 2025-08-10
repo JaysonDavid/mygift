@@ -859,6 +859,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var btn = document.getElementById("startMemorialBtn");
     var overlay = document.getElementById("startMemorialOverlay");
     var audio = new Audio("tribute_music.mp3");
+        audio.loop = false;
 
     btn.addEventListener("click", function () {
         audio.currentTime = 0;
