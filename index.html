@@ -277,11 +277,6 @@
 </head>
 <body>
 
-<div class="controls visible" id="controls" style="display:flex;position:fixed;bottom:30px;left:50%;transform:translateX(-50%);z-index:999;">
-    <button id="startMemorialBtn" style="font-size:18px;padding:12px 20px;">START MEMORIAL</button>
-</div>
-
-
 <!-- Black Fade-In Overlay -->
 <div id="fadeInOverlay" style="
     position: fixed;
@@ -371,6 +366,7 @@
         </div>
 
         <div class="controls" id="controls">
+    <button id="startMemorialBtn">START MEMORIAL</button>
             <button id="playBtn">Play Journey</button>
             <button id="pauseBtn" class="active">Pause</button>
             <button id="resetBtn">Restart Memorial</button>
@@ -853,28 +849,25 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 <script>
-console.log("Start Memorial script loaded");
 document.addEventListener("DOMContentLoaded", function () {
     const startBtn = document.getElementById("startMemorialBtn");
-    const controls = document.getElementById("controls");
+    if (!startBtn) { console.error("START MEMORIAL button not found"); return; }
 
+    // Prepare audio
     const audio = new Audio("tribute_music.mp3");
 
     startBtn.addEventListener("click", function () {
         console.log("START MEMORIAL button clicked");
         audio.currentTime = 0;
-        audio.play().then(() => {
-            console.log("Audio started");
-        }).catch(err => console.error("Audio play failed:", err));
+        audio.play().catch(err => console.error("Audio play failed:", err));
 
-        // Trigger animations
+        // Trigger the existing sequence by activating content layers
         document.querySelectorAll(".content-layer").forEach(layer => {
             layer.classList.add("active");
         });
 
-        // Fade out button
-        controls.style.opacity = "0";
-        setTimeout(() => controls.style.display = "none", 1000);
+        // Hide the button after starting
+        startBtn.style.display = "none";
     });
 });
 </script>
