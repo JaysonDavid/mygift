@@ -277,8 +277,8 @@
 </head>
 <body>
 
-<div id="startMemorialControls" style="display:flex;justify-content:center;align-items:center;position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:9999;">
-    <button id="startMemorialBtn" style="font-size:20px;padding:12px 24px;background:#1e3c72;color:#fff;border:none;border-radius:8px;cursor:pointer;">START MEMORIAL</button>
+<div id="startMemorialControls" style="display:flex;justify-content:center;align-items:center;position:fixed;top:0;left:0;width:100%;height:100%;background:black;z-index:9999;">
+    <button id="startMemorialBtn" style="font-size:22px;padding:14px 28px;background:#1e3c72;color:white;border:none;border-radius:8px;cursor:pointer;">START MEMORIAL</button>
 </div>
 
 
@@ -853,28 +853,24 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 <script>
-console.log("Start Memorial standalone script loaded");
 document.addEventListener("DOMContentLoaded", function () {
-    const startBtn = document.getElementById("startMemorialBtn");
-    const controlsDiv = document.getElementById("startMemorialControls");
-    if (!startBtn) { console.error("START MEMORIAL button not found"); return; }
-
+    const btn = document.getElementById("startMemorialBtn");
+    const controls = document.getElementById("startMemorialControls");
     const audio = new Audio("tribute_music.mp3");
 
-    startBtn.addEventListener("click", function () {
+    btn.addEventListener("click", function () {
         console.log("START MEMORIAL button clicked");
         audio.currentTime = 0;
-        audio.play().then(() => {
-            console.log("Audio started successfully");
-        }).catch(err => console.error("Audio play failed:", err));
+        audio.play().catch(err => console.error("Audio play failed:", err));
 
-        // Trigger existing animation sequence
-        document.querySelectorAll(".content-layer").forEach(layer => {
-            layer.classList.add("active");
-        });
+        // Activate only the Cygnus map layer (scene2)
+        const cygnusLayer = document.querySelector('#scene2.content-layer');
+        if (cygnusLayer) {
+            cygnusLayer.classList.add("active");
+        }
 
-        // Hide button controls
-        controlsDiv.style.display = "none";
+        // Remove the overlay with the button
+        controls.style.display = "none";
     });
 });
 </script>
