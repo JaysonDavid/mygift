@@ -277,11 +277,6 @@
 </head>
 <body>
 
-<div class="controls visible" id="controls">
-    <button id="startMemorialBtn">START MEMORIAL</button>
-</div>
-
-
 <!-- Black Fade-In Overlay -->
 <div id="fadeInOverlay" style="
     position: fixed;
@@ -850,32 +845,6 @@ document.addEventListener("DOMContentLoaded", function() {
 <audio id="tributeAudio" preload="auto">
     <source src="tribute_music.mp3" type="audio/mp3">
 </audio>
-
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const startBtn = document.getElementById("startMemorialBtn");
-    const controls = document.getElementById("controls");
-
-    // Change this to the exact file name of your MP3
-    const audio = new Audio("tribute_music.mp3");
-
-    startBtn.addEventListener("click", function () {
-        // Start music
-        audio.currentTime = 0;
-        audio.play().catch(err => console.error("Audio play failed:", err));
-
-        // Start all content-layer animations
-        document.querySelectorAll(".content-layer").forEach(layer => {
-            layer.classList.add("active");
-        });
-
-        // Fade out the button
-        controls.style.opacity = "0";
-        setTimeout(() => controls.style.display = "none", 1000);
-    });
-});
-</script>
 
 </body>
 </html>
