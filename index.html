@@ -355,7 +355,6 @@
             <h3>Cosmic Journey Status</h3>
             <div id="currentDate">Date: August 5th, 1986</div>
             <div id="daysElapsed">Days Elapsed: 0</div>
-            <div id="hoursElapsed">Hours Since I Last Held You: 0</div>
             <div id="yearsElapsed">Years Elapsed: 0.0</div>
             <div id="earthOrbits">Earth Orbits: 0</div>
             <div id="earthDistance">Earth Distance: 0 billion miles</div>
@@ -670,8 +669,6 @@
                 `Date: ${currentDate.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}`;
             document.getElementById('daysElapsed').textContent = 
                 `Days Elapsed: ${Math.round(daysElapsed)}`;
-            document.getElementById('hoursElapsed').textContent = 
-            `Hours Since I Last Held You: ${Math.round(daysElapsed * 24).toLocaleString()}`;
             document.getElementById('yearsElapsed').textContent = 
                 `Years Elapsed: ${Math.round(currentYears * 10) / 10}`;
             document.getElementById('earthOrbits').textContent = 
@@ -845,26 +842,9 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 
-<audio id="tributeAudio" preload="auto" autoplay loop>
+<audio id="tributeAudio" preload="auto">
     <source src="tribute_music.mp3" type="audio/mp3">
 </audio>
-<audio id="bg-music" preload="auto">
-  <source src="tribute_music.mp3" type="audio/mpeg">
-</audio>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Require user interaction to start music
-  function startMusicOnce() {
-    const music = document.getElementById('bg-music');
-    if (music && music.paused) {
-      music.play().catch(err => console.log("Playback prevented:", err));
-    }
-    document.removeEventListener('click', startMusicOnce);
-    document.removeEventListener('touchstart', startMusicOnce);
-  }
-
-  document.addEventListener('click', startMusicOnce);
-  document.addEventListener('touchstart', startMusicOnce);
-});
-</script>
+</body>
+</html>
