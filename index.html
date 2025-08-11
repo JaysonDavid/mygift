@@ -767,7 +767,14 @@ window.addEventListener('load', () => {
 window.addEventListener('load', () => {
     const fadeInOverlay = document.getElementById('fadeInOverlay');
     setTimeout(() => {
-        fadeInOverlay.style.opacity = '0';
+        
+    const tributeAudio = document.getElementById('tributeAudio');
+    if (tributeAudio) {
+        tributeAudio.pause();
+        tributeAudio.currentTime = tributeAudio.duration;
+    }
+
+    fadeInOverlay.style.opacity = '0';
         setTimeout(() => fadeInOverlay.remove(), 2500);
     }, 500);
 });
@@ -862,7 +869,8 @@ document.addEventListener("DOMContentLoaded", function () {
         audio.loop = false;
 
     btn.addEventListener("click", function () {
-        audio.currentTime = 0;.then(function() {
+        audio.currentTime = 0;
+        audio.play().then(function() {
             console.log("Music started");
         }).catch(function(err) {
             console.error("Music play failed:", err);
