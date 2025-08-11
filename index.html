@@ -862,8 +862,7 @@ document.addEventListener("DOMContentLoaded", function () {
         audio.loop = false;
 
     btn.addEventListener("click", function () {
-        audio.currentTime = 0;
-        audio.play().then(function() {
+        audio.currentTime = 0;.then(function() {
             console.log("Music started");
         }).catch(function(err) {
             console.error("Music play failed:", err);
