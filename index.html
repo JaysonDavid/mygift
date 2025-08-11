@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=3.0" name="viewport"/>
-<meta content="yes" name="mobile-web-app-capable"/>
-<meta content="yes" name="apple-mobile-web-app-capable"/>
-<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-<title>Jenahfer's Galactic Memorial - Complete Cosmic Journey</title>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=3.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Jenahfer's Galactic Memorial - Complete Cosmic Journey</title>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -277,11 +276,14 @@
     </style>
 </head>
 <body>
+
 <div id="startMemorialOverlay" style="display:flex;justify-content:center;align-items:center;position:fixed;top:0;left:0;width:100%;height:100%;background:black;z-index:9999;">
-<button id="startMemorialBtn" style="font-size:24px;padding:16px 32px;background:#1e3c72;color:white;border:none;border-radius:8px;cursor:pointer;">
+    <button id="startMemorialBtn" style="font-size:24px;padding:16px 32px;background:#1e3c72;color:white;border:none;border-radius:8px;cursor:pointer;">
         START MEMORIAL
     </button>
 </div>
+
+
 <!-- Black Fade-In Overlay -->
 <div id="fadeInOverlay" style="
     position: fixed;
@@ -294,6 +296,8 @@
     opacity: 1;
     transition: opacity 2.5s ease-in-out;
 "></div>
+
+
 <!-- Crossfade Intro Overlay -->
 <div id="introOverlay" style="
     position: fixed;
@@ -308,64 +312,74 @@
     transition: opacity 3s ease-in-out;
 ">
 </div>
-<div class="star-field" id="starField"></div>
-<div class="progress-bar" id="progressBar"></div>
-<div class="animation-container">
-<canvas class="simulation-canvas" id="canvas"></canvas>
-<!-- Scene 1: Title -->
-<div class="content-layer active" id="scene1">
-<h1>Jenahfer's Galactic Memorial</h1>
-<div class="memorial-quote">
-                "In memory of my sweet lady, my beloved wife<br/>
+
+    <div class="star-field" id="starField"></div>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="animation-container">
+        <canvas id="canvas" class="simulation-canvas"></canvas>
+        
+        <!-- Scene 1: Title -->
+        <div class="content-layer active" id="scene1">
+            <h1>Jenahfer's Galactic Memorial</h1>
+            <div class="memorial-quote">
+                "In memory of my sweet lady, my beloved wife<br>
                 Forever shining as Jeneb through our cosmic journey"
             </div>
-<div class="date-marker">★ August 5th, 1986 - August 5th, 2025 ★</div>
-</div>
-<!-- Scene 2: Beginning -->
-<div class="content-layer" id="scene2">
-<h2>August 5th, 1986</h2>
-<p>On this day, our solar system began its journey through 171 billion miles of galactic space. Above in the summer sky, Cygnus soared with Jeneb watching over us as we started this magnificent cosmic voyage.</p>
-</div>
-<!-- Scene 3: Constellation -->
-<div class="content-layer" id="scene3">
-<h2>The Faithful Beacon</h2>
-<p>While our entire solar system travels through the galaxy at 514,000 mph, Jeneb remains our constant celestial guardian - 2,600 light-years away, steadfast and unchanging throughout our cosmic wandering.</p>
-</div>
-<!-- Scene 4: Journey -->
-<div class="content-layer" id="scene4">
-<h2>39 Years of Galactic Motion</h2>
-<p>Watch as our solar system spirals through the Milky Way - Earth orbiting the Sun 39 times while our entire stellar neighborhood travels 171 billion miles through space, always under Jeneb's watchful light.</p>
-</div>
-<!-- Scene 5: Final -->
-<div class="content-layer" id="scene5">
-<h2>An Eternal Cosmic Memorial</h2>
-<div class="memorial-quote">
-                "Through galaxies vast and time unending,<br/>
-                Love transcends all space and motion.<br/>
-                In Jeneb's light, forever constant,<br/>
+            <div class="date-marker">★ August 5th, 1986 - August 5th, 2025 ★</div>
+        </div>
+
+        <!-- Scene 2: Beginning -->
+        <div class="content-layer" id="scene2">
+            <h2>August 5th, 1986</h2>
+            <p>On this day, our solar system began its journey through 171 billion miles of galactic space. Above in the summer sky, Cygnus soared with Jeneb watching over us as we started this magnificent cosmic voyage.</p>
+        </div>
+
+        <!-- Scene 3: Constellation -->
+        <div class="content-layer" id="scene3">
+            <h2>The Faithful Beacon</h2>
+            <p>While our entire solar system travels through the galaxy at 514,000 mph, Jeneb remains our constant celestial guardian - 2,600 light-years away, steadfast and unchanging throughout our cosmic wandering.</p>
+        </div>
+
+        <!-- Scene 4: Journey -->
+        <div class="content-layer" id="scene4">
+            <h2>39 Years of Galactic Motion</h2>
+            <p>Watch as our solar system spirals through the Milky Way - Earth orbiting the Sun 39 times while our entire stellar neighborhood travels 171 billion miles through space, always under Jeneb's watchful light.</p>
+        </div>
+
+        <!-- Scene 5: Final -->
+        <div class="content-layer" id="scene5">
+            <h2>An Eternal Cosmic Memorial</h2>
+            <div class="memorial-quote">
+                "Through galaxies vast and time unending,<br>
+                Love transcends all space and motion.<br>
+                In Jeneb's light, forever constant,<br>
                 We find peace in cosmic devotion."
             </div>
-</div>
-<div class="info-overlay" id="infoOverlay">
-<h3>Cosmic Journey Status</h3>
-<div id="currentDate">Date: August 5th, 1986</div>
-<div id="daysElapsed">Days Elapsed: 0</div>
-<div id="yearsElapsed">Years Elapsed: 0.0</div>
-<div id="earthOrbits">Earth Orbits: 0</div>
-<div id="earthDistance">Earth Distance: 0 billion miles</div>
-<div class="galactic-info">
-<div id="galacticDistance">Galactic Journey: 0 billion miles</div>
-<div id="galacticSpeed">Solar System Speed: 514,000 mph</div>
-<div id="totalDistance">Total Distance: 0 billion miles</div>
-</div>
-</div>
-<div class="controls" id="controls">
-<button id="playBtn">Play Journey</button>
-<button class="active" id="pauseBtn">Pause</button>
-<button id="resetBtn">Restart Memorial</button>
-</div>
-</div>
-<h2>Hours Since I Last Held You:</h2><div id="hoursCounter" style="font-size:1.5em; font-family:monospace;"></div><script>
+        </div>
+
+        <div class="info-overlay" id="infoOverlay">
+            <h3>Cosmic Journey Status</h3>
+            <div id="currentDate">Date: August 5th, 1986</div>
+            <div id="daysElapsed">Days Elapsed: 0</div>
+            <div id="yearsElapsed">Years Elapsed: 0.0</div>
+            <div id="earthOrbits">Earth Orbits: 0</div>
+            <div id="earthDistance">Earth Distance: 0 billion miles</div>
+            <div class="galactic-info">
+                <div id="galacticDistance">Galactic Journey: 0 billion miles</div>
+                <div id="galacticSpeed">Solar System Speed: 514,000 mph</div>
+                <div id="totalDistance">Total Distance: 0 billion miles</div>
+            </div>
+        </div>
+
+        <div class="controls" id="controls">
+            <button id="playBtn">Play Journey</button>
+            <button id="pauseBtn" class="active">Pause</button>
+            <button id="resetBtn">Restart Memorial</button>
+        </div>
+    </div>
+
+    <script>
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         
@@ -737,6 +751,7 @@
             }, 100);
         });
     </script>
+
 <script>
 window.addEventListener('load', () => {
     const overlay = document.getElementById('introOverlay');
@@ -746,6 +761,8 @@ window.addEventListener('load', () => {
     }, 4000);
 });
 </script>
+
+
 <script>
 window.addEventListener('load', () => {
     const fadeInOverlay = document.getElementById('fadeInOverlay');
@@ -755,6 +772,8 @@ window.addEventListener('load', () => {
     }, 500);
 });
 </script>
+
+
 <!-- Cygnus Overlay -->
 <div id="cygnusOverlay" style="
     position: fixed;
@@ -768,6 +787,7 @@ window.addEventListener('load', () => {
     transition: opacity 3s ease-in-out;
     pointer-events: none;
 "></div>
+
 <!-- Tribute Overlay -->
 <div id="finalTributeOverlay" style="
     position: fixed;
@@ -786,17 +806,18 @@ window.addEventListener('load', () => {
     transition: opacity 3s ease-in-out;
     pointer-events: none;
 ">
-<h1 style="
+    <h1 style="
         font-size: 3em;
         color: white;
         text-shadow: 0 0 20px black;
     ">Jenahfer Elaine</h1>
-<h2 style="
+    <h2 style="
         font-size: 2em;
         color: #87ceeb;
         text-shadow: 0 0 15px black;
     ">April 25, 1963 - August 5, 1986</h2>
 </div>
+
 <script>
 // Wait until DOM is ready
 document.addEventListener("DOMContentLoaded", function() {
@@ -826,9 +847,13 @@ document.addEventListener("DOMContentLoaded", function() {
     observer.observe(lastLayer, { attributes: true });
 });
 </script>
+
+
 <audio id="tributeAudio" preload="auto">
-<source src="tribute_music.mp3" type="audio/mp3"/>
+    <source src="tribute_music.mp3" type="audio/mp3">
 </audio>
+
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     var btn = document.getElementById("startMemorialBtn");
@@ -854,20 +879,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
-<script>
-(function() {
-    const startDate = new Date(1986, 7, 5, 19, 7); // month 7 = August
-    const el = document.getElementById('hoursCounter');
 
-    function updateCounter() {
-        const now = new Date();
-        const diffMs = now - startDate;
-        const hours = Math.floor(diffMs / (1000 * 60 * 60));
-        el.textContent = hours.toLocaleString();
-    }
-
-    updateCounter(); // initial run
-    setInterval(updateCounter, 60 * 1000); // update every minute
-})();
-</script></body>
+</body>
 </html>
