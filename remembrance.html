@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Remembrance</title>
+<style>
+  body {
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    font-family: Georgia, serif;
+    color: #fff;
+    text-align: center;
+  }
+  #hoursContainer {
+    position: absolute;
+    top: 260px; /* nudged further down to avoid overlay */
+    left: 50%;
+    transform: translateX(-50%);
+    font-style: italic;
+    font-size: 1.2em;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+  }
+</style>
+</head>
+<body>
+
+<div id="hoursContainer">Hours Since I Last Held You: ...</div>
+
+<script>
+  const hoursContainer = document.getElementById('hoursContainer');
+
+  function updateHoursText() {
+    const startDate = new Date('1986-08-05T00:00:00');
+    const now = new Date();
+    const diffMs = now - startDate;
+    const hours = Math.floor(diffMs / (1000 * 60 * 60));
+    const minutes = Math.floor((diffMs / (1000 * 60)) % 60);
+    hoursContainer.textContent =
+      `Hours Since I Last Held You: ${hours.toLocaleString()} hours, ${minutes} minutes`;
+  }
+
+  // Fade in/out tied to timing
+  function startCounter() {
+    updateHoursText();
+    setTimeout(() => {
+      hoursContainer.style.opacity = 1;
+    }, 68000); // 1:08 fade in
+    setTimeout(() => {
+      hoursContainer.style.opacity = 0;
+    }, 92000); // 1:32 fade out
+  }
+
+  // Start immediately (same behavior as old file)
+  window.onload = startCounter;
+</script>
+
+</body>
+</html>
