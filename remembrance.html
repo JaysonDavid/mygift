@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Remembrance</title>
+<style>
+  body {
+    background-color: black;
+    margin: 0;
+    padding: 0;
+    font-family: Georgia, serif;
+    color: #fff;
+    text-align: center;
+  }
+  #startButton {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  #hoursContainer {
+    position: absolute;
+    top: 260px; /* moved down from original to avoid overlay */
+    left: 50%;
+    transform: translateX(-50%);
+    font-style: italic;
+    font-size: 1.2em;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+  }
+  iframe {
+    display: none; /* hidden until memorial starts */
+    width: 100%;
+    height: 100vh;
+    border: none;
+  }
+</style>
+</head>
+<body>
+
+<h1>Jenahfer Memorial</h1>
+<button id="startButton">Start Memorial</button>
+<div id="hoursContainer">Hours Since I Last Held You: ...</div>
+<iframe id="memorialFrame" src="index.html"></iframe>
+
+<script>
+  const startButton = document.getElementById('startButton');
+  const hoursContainer = document.getElementById('hoursContainer');
+  const memorialFrame = document.getElementById('memorialFrame');
+
+  function updateHoursText() {
+    const startDate = new Date('1986-08-05T00:00:00');
+    const now = new Date();
+    const diffMs = now - startDate;
+    const hours = Math.floor(diffMs / (1000 * 60 * 60));
+    const minutes = Math.floor((diffMs / (1000 * 60)) % 60);
+    hoursContainer.textContent =
+      `Hours Since I Last Held You: ${hours.toLocaleString()} hours, ${minutes} minutes`;
+  }
+
+  startButton.addEventListener('click', () => {
+    // Hide button
+    startButton.style.display = 'none';
+    // Show the memorial sequence
+    memorialFrame.style.display = 'block';
+    // Trigger the counter updates
+    updateHoursText();
+    // Fade in at 1:08 (68s)
+    setTimeout(() => {
+      hoursContainer.style.opacity = 1;
+    }, 68000);
+    // Fade out at 1:32 (92s)
+    setTimeout(() => {
+      hoursContainer.style.opacity = 0;
+    }, 92000);
+  });
+</script>
+
+</body>
+</html>
